@@ -7,6 +7,7 @@ public class SliderMovement : MonoBehaviour
     public float minValue = 0f; // Minimum slider value
     public float maxValue = 1f; // Maximum slider value
     public float moveSpeed = 0.5f; // Rate of moving between min and max
+    public GameObject projectilePrefab; // What we'll instantiate and send on its way.
 
     private bool isMoving = true; // Determines whether the slider is still moving
     private float direction = 1f; // Direction in which the slider is moving (1 for right, -1 for left)
@@ -53,6 +54,23 @@ public class SliderMovement : MonoBehaviour
         // Destroy the game object
         Destroy(gameObject);
 	return slider.value;
+    }
+
+    void InstantiateProjectile()
+    {
+        // Instantiate the projectile at the spawn point
+        // GameObject projectile = Instantiate(projectilePrefab, PLAYER'S POSITION, PLAYER'S ROTATION);
+
+        // Assign the current slider value (speed) to the projectile's velocity
+       // Rigidbody rb = projectile.GetComponent<Rigidbody>();
+       // if (rb != null)
+       // {
+            // We also would need to multiply by some thing of vector3.up
+          //  Vector3 velocity = PLAYER'S POSITION * slider.value;
+         //   rb.velocity = velocity;
+     	// }
+
+        Debug.Log("Projectile Speed: " + slider.value);  // Log the projectile's speed
     }
 }
 
