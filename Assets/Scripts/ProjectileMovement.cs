@@ -50,7 +50,7 @@ public class ProjectileMovement : MonoBehaviour
             Vector2 DragEndPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 _velocity = (DragEndPos - DragStartPos) * power;
 
-            //rb.linearVelocity = _velocity;
+            rb.linearVelocity = _velocity;
         }
     }
 
