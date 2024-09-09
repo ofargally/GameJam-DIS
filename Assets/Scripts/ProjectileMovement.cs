@@ -9,7 +9,12 @@ public class ProjectileMovement : MonoBehaviour
     // angle, and mass and plan out a parabola
     // for the projectile to move
 
+    public int minPower;
+    public int maxPower;
+
     public float power = 5f;
+
+    public float angle;
 
     private Rigidbody2D rb;
 
@@ -45,9 +50,10 @@ public class ProjectileMovement : MonoBehaviour
             Vector2 DragEndPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 _velocity = (DragEndPos - DragStartPos) * power;
 
-            rb.linearVelocity = _velocity;
+            //rb.linearVelocity = _velocity;
         }
     }
+
 
     public Vector2[] Plot(Rigidbody2D rigidbody, Vector2 pos, Vector2 velocity, int steps) {
         Vector2[] results = new Vector2[steps];
@@ -69,4 +75,6 @@ public class ProjectileMovement : MonoBehaviour
 
         return results;
     }
+
+    
 }
