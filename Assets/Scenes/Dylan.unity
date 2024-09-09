@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 872609750}
   - component: {fileID: 872609749}
   - component: {fileID: 872609754}
+  - component: {fileID: 872609755}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -305,7 +306,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 3
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ec98bcdd9f7c145fe8bd8f96d953f08e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -399,6 +400,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 5
+--- !u!114 &872609755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872609748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1e9207207f04024871d52be37ac6f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  despawnTime: 30
 --- !u!1 &885148014
 GameObject:
   m_ObjectHideFlags: 0
