@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 4446875210366059889, guid: ced1a29ced78f45c486798d3f32c8e7c, type: 3}
+  health: 10
   throwForce: 1000
 --- !u!70 &7674008685352585199
 CapsuleCollider2D:
