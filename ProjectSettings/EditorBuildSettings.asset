@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/Jieni.unity
+    path: Assets/Scenes/Title scene_J.unity
     guid: 1deea22f2542944e193205edc659d962
   - enabled: 1
     path: Assets/Scenes/MasterScene.unity

@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class mainMenu : MonoBehaviour
+public class resume : MonoBehaviour
 {
-    public void PlayGame()
+    public void ResumeGame()
     {
         SceneManager.LoadSceneAsync(1);
+        Time.timeScale = 1;
     }
 }
