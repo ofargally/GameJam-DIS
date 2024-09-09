@@ -14,6 +14,8 @@
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
 
+
+
 # Recordings can get excessive in size
 /[Rr]ecordings/
 
@@ -60,7 +62,7 @@ sysinfo.txt
 *.aab
 *.unitypackage
 *.app
-
+.DS_Store
 # Crashlytics generated file
 crashlytics-build.properties
 
@@ -70,4 +72,3 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-
