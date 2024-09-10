@@ -38,11 +38,7 @@ public class SliderMovement : MonoBehaviour
             }
         }
 
-        // Check if spacebar is pressed
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StopAndReturnValue();
-        }
+        
     }
 
     float StopAndReturnValue()
