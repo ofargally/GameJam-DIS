@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player_2 : MonoBehaviour
+public class Player_2 : PlayerController
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,4 +13,11 @@ public class Player_2 : MonoBehaviour
     {
         
     }
+
+    override protected void Idle(){
+	if (!(TurnManager.isPlayer1Turn)){
+		stateController.TransitionToState(StateController.PlayerState.Aim);
+    		}
+	}
+
 }

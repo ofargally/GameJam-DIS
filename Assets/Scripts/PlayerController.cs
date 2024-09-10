@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     public float framesPerSecond;
 
-    private StateController stateController;
+    protected StateController stateController;
     private AnimationController animationController;
     private SpriteRenderer playerSpriteRenderer;
     private float frameTimer;
@@ -76,10 +76,11 @@ public class PlayerController : MonoBehaviour
         //TODO: Implement death
     }
 
-    private void Idle() {
+    protected virtual void Idle() {
         
     }
-    private void Aim() {
+
+    protected void Aim() {
 	GameObject proj = Instantiate(ballPrefab, transform.position, Quaternion.identity);
     }
     
