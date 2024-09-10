@@ -18,7 +18,8 @@ public class Projectile : MonoBehaviour
     private bool powerLocked = false; // Lock for power
     private bool hasLaunched = false;
 
-
+    public delegate void OnProjectileHits();
+    public static event OnProjectileHits EOnProjectileHits;
 
     void Start()
     {
@@ -141,5 +142,9 @@ public class Projectile : MonoBehaviour
         }
 
         return results;
+    }
+
+    private void OnDestroy() {
+        EOnProjectileHits?.Invoke();
     }
 }
