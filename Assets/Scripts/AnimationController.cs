@@ -1,22 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
-
-//TODO: attach animationController to player prefab
+using System.Collections;
 
 //TODO: add an animate method in the playerController script to flipbook animate the characters
-public class AnimationController: MonoBehaviour {
-    public Sprite[] idleAnimation;
-    public Sprite[] aimAnimation;
-    public Sprite[] fireAnimation;
-    public Sprite[] hurtAnimation;
+public class AnimationController: PlayerController {
     private Dictionary<StateController.PlayerState, Sprite[]> animationAtlas;
 
-    public AnimationController(Sprite[] idle, Sprite[] aim, Sprite[] fire, Sprite[] hurt) {
-        idleAnimation = idle;
-        aimAnimation = aim;
-        fireAnimation = fire;
-        hurtAnimation = hurt;
-
+    public AnimationController() {
         animationAtlas = new Dictionary<StateController.PlayerState, Sprite[]>();
         animationAtlas.Add(StateController.PlayerState.Idle, idleAnimation);
         animationAtlas.Add(StateController.PlayerState.Aim, aimAnimation);
@@ -25,5 +15,20 @@ public class AnimationController: MonoBehaviour {
     }
     public Dictionary<StateController.PlayerState, Sprite[]> GetAnimationAtlas() {
         return animationAtlas;
+    }
+
+    private IEnumerator playIdleAnimation() {
+        int counter = 0;
+        while(counter < idleAnimation.Length) {
+        }
+    }
+    private IEnumerator playAimAnimation() {
+
+    }
+    private IEnumerator playFireAnimation() {
+
+    }
+    private IEnumerator playHitAnimation() {
+
     }
 }

@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         stateController = new StateController(StateController.PlayerState.Idle);
-        animationController = new AnimationController(idleAnimation, aimAnimation, fireAnimation, hurtAnimation);
+        animationController = new AnimationController();
         playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
@@ -82,6 +82,9 @@ public class PlayerController : MonoBehaviour
 
     protected void Aim() {
 	GameObject proj = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+
+        //change states
+        Projectile.EOnProjectileFires += () => stateController.TransitionToState(StateController.PlayerState.Fire);
     }
     
 }
