@@ -6,6 +6,8 @@ public class Projectile : MonoBehaviour
 {
     public delegate void OnProjectileHits();
     public static event OnProjectileHits EOnProjectileHits;
+    public delegate void OnProjectileFire();
+    public static event OnProjectileHits EOnProjectileFires;
 
     public float power = 5f;  // Initial magnitude of the velocity (speed)
     public float angle = 45f; // Angle in degrees
@@ -100,6 +102,8 @@ public class Projectile : MonoBehaviour
 
         // Clear the trajectory once launched
         lr.positionCount = 0;
+
+        EOnProjectileFires?.Invoke();
     }
 
     void DisplayTrajectory()
