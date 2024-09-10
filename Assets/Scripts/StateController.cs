@@ -11,10 +11,16 @@ public class StateController: MonoBehaviour {
 
     private PlayerState state;
 
+    public StateController(PlayerState newState) {
+        state = newState;
+    }
+
     public PlayerState GetPlayerState() {
         return state;
     }
-    public void TransitionToState(PlayerState newState) {
+    public void TransitionToState(float frameTimer, int frameIndex, PlayerState newState) {
+        frameTimer = 0;
+        frameIndex = 0;
         state = newState;
     }
 

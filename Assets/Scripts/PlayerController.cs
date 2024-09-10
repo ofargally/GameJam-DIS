@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -6,15 +7,43 @@ public class PlayerController : MonoBehaviour
 
     public int health = 10;
     public float throwForce = 1000;
+
+    [Header("Animation Sprites")]
+    public Sprite[] idleAnimation;
+    public Sprite[] aimAnimation;
+    public Sprite[] fireAnimation;
+    public Sprite[] hurtAnimation;
+
+    public float framesPerSecond;
+
+    private StateController stateController;
+    private AnimationController animationController;
+    private SpriteRenderer playerSpriteRenderer;
+    private float frameTimer;
+    private int frameIndex;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        stateController = new StateController(StateController.PlayerState.Idle);
+        animationController = new AnimationController(idleAnimation, aimAnimation, fireAnimation, hurtAnimation);
+        playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        switch(stateController.GetPlayerState()) {
+            case StateController.PlayerState.Idle:
+                break;
+            case StateController.PlayerState.Aim:
+                break;
+            case StateController.PlayerState.Fire:
+                break;
+            case StateController.PlayerState.Hit:
+                break;
+        }
         //Get the input from the player - use space to jump
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -23,7 +52,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             TakeDamage(1);
-        }
+        }   
     }
 
     void ThrowBall()
@@ -42,10 +71,16 @@ public class PlayerController : MonoBehaviour
             Die();
         }
     }
-
     void Die()
     {
         //TODO: Implement death
     }
 
+    private void Idle() {
+        
+    }
+    private void Aim() {
+
+    }
+    
 }
