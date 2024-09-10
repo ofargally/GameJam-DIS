@@ -89,6 +89,14 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    public void setMinAngle(float ang) {
+        minAngle = ang;
+    }
+
+    public void setMaxAngle(float ang) {
+        maxAngle = ang;
+    }
+
     void MoveAngleValue()
     {
         // Oscillate the angle value between min and max
