@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         switch (stateController.GetPlayerState())
         {
             case StateController.PlayerState.Idle:
@@ -44,13 +43,15 @@ public class PlayerController : MonoBehaviour
                 Aim();
                 break;
             case StateController.PlayerState.Fire:
+                Fire();
                 break;
             case StateController.PlayerState.Hit:
+                Hit();
                 break;
         }
     }
 
-    void TakeDamage(int damage)
+    protected void TakeDamage(int damage)
     {
         health -= damage;
         if (health <= 0)
@@ -63,11 +64,38 @@ public class PlayerController : MonoBehaviour
         //TODO: Implement death
     }
 
-    protected virtual void Idle() {}
+    protected virtual void Idle() {
+        stateController.TransitionToState(StateController.PlayerState.Aim);
+            
+        StopCoroutine(animation);
+        animation = StartCoroutine(playAimAnimation());
+    }
 
-    protected virtual void Aim() {}
+    protected virtual void Aim() {
+        StopCoroutine(animation);
+        animation = StartCoroutine(playFireAnimation());
+    }
 
-        public IEnumerator playIdleAnimation() {
+    protected virtual void Fire() {
+        if(animation == null) {
+            stateController.TransitionToState(StateController.PlayerState.Idle);
+
+            animation = StartCoroutine(playIdleAnimation());
+        }
+    }
+
+    protected virtual void Hit() {
+        TakeDamage(4);
+        
+        StopCoroutine(animation);
+        animation = StartCoroutine(playHitAnimation());
+
+        if(animation == null) {
+            stateController.TransitionToState(StateController.PlayerState.Idle);
+        }
+    }
+
+    public IEnumerator playIdleAnimation() {
         int counter = 0;
         while(counter < idleAnimation.Length) {
             playerSpriteRenderer.sprite = idleAnimation[counter];
@@ -99,5 +127,9 @@ public class PlayerController : MonoBehaviour
             counter++;
             yield return new WaitForSeconds(1 / framesPerSecond);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        stateController.TransitionToState(StateController.PlayerState.Hit);
     }
 }
