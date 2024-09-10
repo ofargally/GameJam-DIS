@@ -5,7 +5,7 @@ public class Player_2 : PlayerController
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+       Aim(); 
     }
 
     // Update is called once per frame
@@ -19,5 +19,9 @@ public class Player_2 : PlayerController
 		stateController.TransitionToState(StateController.PlayerState.Aim);
     		}
 	}
+
+    override protected void Aim(){
+	    GameObject ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+    }
 
 }

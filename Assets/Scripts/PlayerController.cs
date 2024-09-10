@@ -80,8 +80,8 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    protected void Aim() {
-	GameObject proj = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+    protected virtual void Aim() {
+	    GameObject proj = Instantiate(ballPrefab, transform.position, Quaternion.identity);
 
         //change states
         Projectile.EOnProjectileFires += () => stateController.TransitionToState(StateController.PlayerState.Fire);
