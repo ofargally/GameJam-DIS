@@ -12,15 +12,16 @@ public class PlayerController : MonoBehaviour
     public Sprite[] idleAnimation;
     public Sprite[] aimAnimation;
     public Sprite[] fireAnimation;
-    public Sprite[] hurtAnimation;
+    public Sprite[] hitAnimation;
 
     public float framesPerSecond;
 
     protected StateController stateController;
     private AnimationController animationController;
-    private SpriteRenderer playerSpriteRenderer;
+    protected SpriteRenderer playerSpriteRenderer;
     private float frameTimer;
     private int frameIndex;
+    protected Coroutine animation;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,11 +34,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         switch (stateController.GetPlayerState())
         {
             case StateController.PlayerState.Idle:
+                Idle();
                 break;
             case StateController.PlayerState.Aim:
+                Aim();
                 break;
             case StateController.PlayerState.Fire:
                 break;
@@ -59,16 +63,41 @@ public class PlayerController : MonoBehaviour
         //TODO: Implement death
     }
 
-    protected virtual void Idle()
-    {
+    protected virtual void Idle() {}
 
+    protected virtual void Aim() {}
+
+        public IEnumerator playIdleAnimation() {
+        int counter = 0;
+        while(counter < idleAnimation.Length) {
+            playerSpriteRenderer.sprite = idleAnimation[counter];
+            counter++;
+            counter %= idleAnimation.Length;
+            yield return new WaitForSeconds(1 / framesPerSecond);
+        }
     }
-
-    protected virtual void Aim() {
-        GameObject proj = Instantiate(ballPrefab, transform.position, Quaternion.identity);
-
-        //change states
-        Projectile.EOnProjectileFires += () => stateController.TransitionToState(StateController.PlayerState.Fire);
+    public IEnumerator playAimAnimation() {
+        int counter = 0;
+        while(counter < aimAnimation.Length) {
+            playerSpriteRenderer.sprite = aimAnimation[counter];
+            counter++;
+            yield return new WaitForSeconds(1 / framesPerSecond);
+        }
     }
-
+    public IEnumerator playFireAnimation() {
+        int counter = 0;
+        while(counter < fireAnimation.Length) {
+            playerSpriteRenderer.sprite = fireAnimation[counter];
+            counter++;
+            yield return new WaitForSeconds(1 / framesPerSecond);
+        }
+    }
+    public IEnumerator playHitAnimation() {
+        int counter = 0;
+        while(counter < hitAnimation.Length) {
+            playerSpriteRenderer.sprite = hitAnimation[counter];
+            counter++;
+            yield return new WaitForSeconds(1 / framesPerSecond);
+        }
+    }
 }

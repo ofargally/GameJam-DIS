@@ -16,14 +16,22 @@ public class Player_1 : PlayerController
 
     override protected void Idle()
     {
-        if (!(TurnManager.isPlayer1Turn))
+        if (TurnManager.isPlayer1Turn)
         {
             stateController.TransitionToState(StateController.PlayerState.Aim);
+            
+            StopCoroutine(animation);
+            animation = StartCoroutine(playAimAnimation());
         }
     }
 
     override protected void Aim()
     {
         GameObject ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+        //change states
+        Projectile.EOnProjectileFires += () => stateController.TransitionToState(StateController.PlayerState.Fire);
+
+        StopCoroutine(animation);
+        animation = StartCoroutine(playFireAnimation());
     }
 }

@@ -24,7 +24,11 @@ public class Player_2 : PlayerController
 
     override protected void Aim()
     {
+        //TODO: flip the projectile
         GameObject ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+        
+        //change states
+        Projectile.EOnProjectileFires += () => stateController.TransitionToState(StateController.PlayerState.Fire);
     }
 
 }
