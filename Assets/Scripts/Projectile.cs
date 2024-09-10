@@ -1,8 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;  // Required for Action
 
 public class Projectile : MonoBehaviour
 {
+    public delegate void OnProjectileHits();
+    public static event OnProjectileHits EOnProjectileHits;
+
     public float power = 5f;  // Initial magnitude of the velocity (speed)
     public float angle = 45f; // Angle in degrees
     public GameObject powerSliderPrefab; // Reference to the power slider prefab
@@ -17,8 +21,6 @@ public class Projectile : MonoBehaviour
     private bool angleLocked = false; // Lock for angle
     private bool powerLocked = false; // Lock for power
     private bool hasLaunched = false;
-
-
 
     void Start()
     {
@@ -105,11 +107,13 @@ public class Projectile : MonoBehaviour
         float currentAngle = angle;
         float currentPower = power;
         // Use slider values if the sliders are available and not yet locked
-        if (!angleLocked) {
-            currentAngle = angleLocked ? angle : (angleSliderInstance != null ? angleSliderInstance.value : angle);
+        if (!angleLocked)
+        {
+            currentAngle = (angleSliderInstance != null ? angleSliderInstance.value : angle);
         }
-        if (!powerLocked && angleLocked) {
-            currentPower = powerLocked ? power : (powerSliderInstance != null ? powerSliderInstance.value : power);
+        if (!powerLocked && angleLocked)
+        {
+            currentPower = (powerSliderInstance != null ? powerSliderInstance.value : power);
         }
         // Convert angle from degrees to radians
         float angleInRadians = currentAngle * Mathf.Deg2Rad;
@@ -150,5 +154,10 @@ public class Projectile : MonoBehaviour
         }
 
         return results;
+    }
+
+    void OnDestroy()
+    {
+        EOnProjectileHits?.Invoke();
     }
 }
