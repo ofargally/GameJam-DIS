@@ -18,8 +18,7 @@ public class Projectile : MonoBehaviour
     private bool powerLocked = false; // Lock for power
     private bool hasLaunched = false;
 
-    public delegate void OnProjectileHits();
-    public static event OnProjectileHits EOnProjectileHits;
+
 
     void Start()
     {
@@ -77,8 +76,8 @@ public class Projectile : MonoBehaviour
             Destroy(angleSliderInstance.gameObject);
         }
 
-        // Show trajectory if angle and power are set but not launched yet
-        if (angleLocked && powerLocked && !hasLaunched)
+        // Show trajectory if not launched yet
+        if (!hasLaunched)
         {
             DisplayTrajectory();
         }
@@ -103,12 +102,21 @@ public class Projectile : MonoBehaviour
 
     void DisplayTrajectory()
     {
+        float currentAngle = angle;
+        float currentPower = power;
+        // Use slider values if the sliders are available and not yet locked
+        if (!angleLocked) {
+            currentAngle = angleLocked ? angle : (angleSliderInstance != null ? angleSliderInstance.value : angle);
+        }
+        if (!powerLocked && angleLocked) {
+            currentPower = powerLocked ? power : (powerSliderInstance != null ? powerSliderInstance.value : power);
+        }
         // Convert angle from degrees to radians
-        float angleInRadians = angle * Mathf.Deg2Rad;
+        float angleInRadians = currentAngle * Mathf.Deg2Rad;
 
         // Calculate velocity components based on angle and power
-        float velocityX = power * Mathf.Cos(angleInRadians);
-        float velocityY = power * Mathf.Sin(angleInRadians);
+        float velocityX = currentPower * Mathf.Cos(angleInRadians);
+        float velocityY = currentPower * Mathf.Sin(angleInRadians);
 
         // Plot the trajectory
         Vector2 _velocity = new Vector2(velocityX, velocityY);
@@ -142,9 +150,5 @@ public class Projectile : MonoBehaviour
         }
 
         return results;
-    }
-
-    private void OnDestroy() {
-        EOnProjectileHits?.Invoke();
     }
 }
