@@ -18,9 +18,7 @@ public class StateController: MonoBehaviour {
     public PlayerState GetPlayerState() {
         return state;
     }
-    public void TransitionToState(float frameTimer, int frameIndex, PlayerState newState) {
-        frameTimer = 0;
-        frameIndex = 0;
+    public void TransitionToState(PlayerState newState) {
         state = newState;
     }
 
