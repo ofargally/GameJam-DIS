@@ -78,7 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8164023997fe442aba4530dfdf3a3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPower: 0
-  maxPower: 100
   power: 5
   angle: 45
+  powerSliderPrefab: {fileID: 8931630401356411677, guid: 503fbfabd004cd522b87c73d75ceb08e, type: 3}
+  angleSliderPrefab: {fileID: 6528708000844797221, guid: 67d9dd0d4152570a8a553d8753b1ffb8, type: 3}
+  decayTime: 0
