@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2342315197449264887, guid: 9cbb872dbb392477b9c929b0cef700e5, type: 3}
       propertyPath: despawnTime
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4993458982233557003, guid: 9cbb872dbb392477b9c929b0cef700e5, type: 3}
       propertyPath: m_Name
@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Projectile
       objectReference: {fileID: 0}
+    - target: {fileID: 6950975741957279630, guid: 9cbb872dbb392477b9c929b0cef700e5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5863276029491247737, guid: 0a9a751fb561a491c8816c06f966810d, type: 3}
     - target: {fileID: 7556618011542157025, guid: 9cbb872dbb392477b9c929b0cef700e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -66,7 +70,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4993458982233557003, guid: 9cbb872dbb392477b9c929b0cef700e5, type: 3}
-      insertIndex: -1
+      insertIndex: 1
       addedObject: {fileID: 1990744416780363609}
   m_SourcePrefab: {fileID: 100100000, guid: 9cbb872dbb392477b9c929b0cef700e5, type: 3}
 --- !u!1 &8373330841037658149 stripped
@@ -88,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   power: 5
   angle: 45
-  decayTime: 3
+  decayTime: 5
   sliderSpeed: 30
   minPower: 1
   maxPower: 40
