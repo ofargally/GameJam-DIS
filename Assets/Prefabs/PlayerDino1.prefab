@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -4148763684417236192}
   - component: {fileID: -2677889207714468280}
   - component: {fileID: -1700472048658513367}
+  - component: {fileID: 1385020056303411289}
   m_Layer: 0
   m_Name: PlayerDino1
   m_TagString: Untagged
@@ -153,3 +154,36 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.0625, y: 1.1875}
   m_Direction: 0
+--- !u!114 &1385020056303411289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117663919471248814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93279508d4f3e4164a039759901603d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 8373330841037658149, guid: d62396cb2fee743aea31aa3227804215, type: 3}
+  health: 10
+  throwForce: 1000
+  idleAnimation:
+  - {fileID: -1193820911090328509, guid: 4a40ba5a3b64149adafe8d042200f3d5, type: 3}
+  - {fileID: -4782104476085066544, guid: 4a40ba5a3b64149adafe8d042200f3d5, type: 3}
+  aimAnimation:
+  - {fileID: 5790736894352482622, guid: 4a40ba5a3b64149adafe8d042200f3d5, type: 3}
+  - {fileID: 1017339619195510989, guid: 4a40ba5a3b64149adafe8d042200f3d5, type: 3}
+  - {fileID: 2435977642620248713, guid: 4a40ba5a3b64149adafe8d042200f3d5, type: 3}
+  fireAnimation:
+  - {fileID: -779620069307929898, guid: 4a40ba5a3b64149adafe8d042200f3d5, type: 3}
+  - {fileID: -4973719480991979858, guid: 4a40ba5a3b64149adafe8d042200f3d5, type: 3}
+  - {fileID: -856149755822829703, guid: 4a40ba5a3b64149adafe8d042200f3d5, type: 3}
+  - {fileID: 9005231359350743733, guid: 4a40ba5a3b64149adafe8d042200f3d5, type: 3}
+  hitAnimation:
+  - {fileID: 9005231359350743733, guid: 4a40ba5a3b64149adafe8d042200f3d5, type: 3}
+  - {fileID: -3062889640021937877, guid: 4a40ba5a3b64149adafe8d042200f3d5, type: 3}
+  - {fileID: 2344094080979329109, guid: 4a40ba5a3b64149adafe8d042200f3d5, type: 3}
+  - {fileID: 6187166469564620892, guid: 4a40ba5a3b64149adafe8d042200f3d5, type: 3}
+  framesPerSecond: 10

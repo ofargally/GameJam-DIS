@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4156837782603880017}
   - component: {fileID: -1686716262195024841}
   - component: {fileID: 6522978125302664165}
+  - component: {fileID: -5167479933712548570}
   m_Layer: 0
   m_Name: PlayerDino2
   m_TagString: Untagged
@@ -153,3 +154,37 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.0625, y: 1.1875}
   m_Direction: 0
+--- !u!114 &-5167479933712548570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523603811070324007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f31fd5091b1e9404db59d8b91fae3125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 8373330841037658149, guid: d62396cb2fee743aea31aa3227804215, type: 3}
+  health: 10
+  throwForce: 1000
+  idleAnimation:
+  - {fileID: 6691028219476326333, guid: faaf3ec9ed42c4b9db894ec5720344bf, type: 3}
+  - {fileID: -7050936211536604874, guid: faaf3ec9ed42c4b9db894ec5720344bf, type: 3}
+  - {fileID: 3892007775154629039, guid: faaf3ec9ed42c4b9db894ec5720344bf, type: 3}
+  aimAnimation:
+  - {fileID: -8076282053597747824, guid: faaf3ec9ed42c4b9db894ec5720344bf, type: 3}
+  - {fileID: 8290033169379867662, guid: faaf3ec9ed42c4b9db894ec5720344bf, type: 3}
+  - {fileID: -7052608118931786951, guid: faaf3ec9ed42c4b9db894ec5720344bf, type: 3}
+  - {fileID: 5189316863325423101, guid: faaf3ec9ed42c4b9db894ec5720344bf, type: 3}
+  fireAnimation:
+  - {fileID: 2062446517480778853, guid: faaf3ec9ed42c4b9db894ec5720344bf, type: 3}
+  - {fileID: 6178395073055205736, guid: faaf3ec9ed42c4b9db894ec5720344bf, type: 3}
+  - {fileID: 7264109746181828782, guid: faaf3ec9ed42c4b9db894ec5720344bf, type: 3}
+  hitAnimation:
+  - {fileID: 2117462673338501670, guid: faaf3ec9ed42c4b9db894ec5720344bf, type: 3}
+  - {fileID: 6544952145016737834, guid: faaf3ec9ed42c4b9db894ec5720344bf, type: 3}
+  - {fileID: -5735697422507794182, guid: faaf3ec9ed42c4b9db894ec5720344bf, type: 3}
+  - {fileID: -2994496558559529712, guid: faaf3ec9ed42c4b9db894ec5720344bf, type: 3}
+  framesPerSecond: 10

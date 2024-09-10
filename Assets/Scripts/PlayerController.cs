@@ -21,14 +21,18 @@ public class PlayerController : MonoBehaviour
     protected SpriteRenderer playerSpriteRenderer;
     private float frameTimer;
     private int frameIndex;
-    protected Coroutine animation;
+    protected Coroutine anim;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         stateController = new StateController(StateController.PlayerState.Idle);
         animationController = new AnimationController();
         playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+    }
+
+    void Start() {
+        anim = StartCoroutine(playIdleAnimation());
     }
 
     // Update is called once per frame
@@ -67,30 +71,30 @@ public class PlayerController : MonoBehaviour
     protected virtual void Idle() {
         stateController.TransitionToState(StateController.PlayerState.Aim);
             
-        StopCoroutine(animation);
-        animation = StartCoroutine(playAimAnimation());
+        StopCoroutine(anim);
+        anim = StartCoroutine(playAimAnimation());
     }
 
     protected virtual void Aim() {
-        StopCoroutine(animation);
-        animation = StartCoroutine(playFireAnimation());
+        StopCoroutine(anim);
+        anim = StartCoroutine(playFireAnimation());
     }
 
     protected virtual void Fire() {
-        if(animation == null) {
+        if(anim == null) {
             stateController.TransitionToState(StateController.PlayerState.Idle);
 
-            animation = StartCoroutine(playIdleAnimation());
+            anim = StartCoroutine(playIdleAnimation());
         }
     }
 
     protected virtual void Hit() {
         TakeDamage(4);
         
-        StopCoroutine(animation);
-        animation = StartCoroutine(playHitAnimation());
+        StopCoroutine(anim);
+        anim = StartCoroutine(playHitAnimation());
 
-        if(animation == null) {
+        if(anim == null) {
             stateController.TransitionToState(StateController.PlayerState.Idle);
         }
     }

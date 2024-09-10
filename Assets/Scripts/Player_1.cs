@@ -16,7 +16,7 @@ public class Player_1 : PlayerController
 
     override protected void Idle()
     {
-        if (TurnManager.isPlayer1Turn)
+        if (!TurnManager.isPlayer1Turn)
         {
             base.Idle();
         }
