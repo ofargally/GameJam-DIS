@@ -1,7 +1,7 @@
 using UnityEngine;
 
 //TODO: add StateController object to PlayerController script
-public class StateController: MonoBehaviour {
+public class StateController {
     public enum PlayerState {
         Idle,
         Aim,
@@ -19,6 +19,7 @@ public class StateController: MonoBehaviour {
         return state;
     }
     public void TransitionToState(PlayerState newState) {
+        Debug.Log("Transition to " + newState) ;
         state = newState;
     }
 

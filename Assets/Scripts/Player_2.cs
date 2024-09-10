@@ -2,29 +2,19 @@ using UnityEngine;
 
 public class Player_2 : PlayerController
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
+    public static Player_2 Instance;
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    override protected void Idle()
-    {
-        if (TurnManager.isPlayer1Turn)
-        {
-            base.Idle();
-        }
+    protected override void Awake() {
+        base.Awake();
+        Instance = this;
+        Idle();
     }
 
     override protected void Aim()
     {
-        //TODO: flip the projectile
-        GameObject ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+        Vector2 spawnPosition = transform.position;
+        spawnPosition.x -= 1.5f;
+        GameObject ball = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
         Projectile projectile = ball.GetComponent<Projectile>();
         projectile.setMinAngle(90);
         projectile.setMaxAngle(180);

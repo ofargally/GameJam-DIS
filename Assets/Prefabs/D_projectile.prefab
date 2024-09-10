@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a1e9207207f04024871d52be37ac6f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  despawnTime: 50
+  despawnTime: 5
 --- !u!114 &-8929734840751314072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +62,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 970719a2782924521b248891d325bf44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minPower: 0
+  maxPower: 0
   power: 5
+  angle: 0
 --- !u!212 &6950975741957279630
 SpriteRenderer:
   m_ObjectHideFlags: 0

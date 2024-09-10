@@ -64,14 +64,12 @@ public class Projectile : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && !angleLocked)
             {
                 angle = angleSliderValue;
-                Debug.Log("Angle locked at: " + angle);
                 angleLocked = true;
             }
             // Lock in the power when the player presses space the second time
             else if (Input.GetKeyDown(KeyCode.Space) && angleLocked && !powerLocked)
             {
                 power = powerSliderValue;
-                Debug.Log("Power locked at: " + power);
                 powerLocked = true;
             }
             // Launch the projectile when the player presses space the third time
@@ -106,8 +104,6 @@ public class Projectile : MonoBehaviour
         {
             angleDirection *= -1; // Reverse direction when reaching the boundaries
         }
-
-        Debug.Log("Current Angle: " + angleSliderValue); // Debugging to show the value changing
     }
 
     void MovePowerValue()
@@ -119,8 +115,6 @@ public class Projectile : MonoBehaviour
         {
             powerDirection *= -1; // Reverse direction when reaching the boundaries
         }
-
-        Debug.Log("Current Power: " + powerSliderValue); // Debugging to show the value changing
     }
 
     void LaunchProjectile()

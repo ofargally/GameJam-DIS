@@ -10,11 +10,22 @@ public class TurnManager: MonoBehaviour {
         Projectile.EOnProjectileHits += () => StartCoroutine(OnProjectileHit());
         isPlayer1Turn = true;
     }
+
+
+    
     private IEnumerator OnProjectileHit() {
         yield return new WaitForSeconds(waitTime);
 	SwapPlayer();
     }
-    private void SwapPlayer() {
+    private void SwapPlayer() 
+    {
+        if(isPlayer1Turn){
+            Player_1.Instance.EndTurn();
+            Player_2.Instance.StartTurn();
+        }else{
+            Player_1.Instance.StartTurn();
+            Player_2.Instance.EndTurn();
+        }
         isPlayer1Turn = !isPlayer1Turn;
     }
 }

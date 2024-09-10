@@ -8,9 +8,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2342315197449264887, guid: 9cbb872dbb392477b9c929b0cef700e5, type: 3}
+      propertyPath: despawnTime
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4993458982233557003, guid: 9cbb872dbb392477b9c929b0cef700e5, type: 3}
       propertyPath: m_Name
       value: shot_D
+      objectReference: {fileID: 0}
+    - target: {fileID: 4993458982233557003, guid: 9cbb872dbb392477b9c929b0cef700e5, type: 3}
+      propertyPath: m_TagString
+      value: Projectile
       objectReference: {fileID: 0}
     - target: {fileID: 7556618011542157025, guid: 9cbb872dbb392477b9c929b0cef700e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -80,7 +88,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   power: 5
   angle: 45
-  decayTime: 10
+  decayTime: 3
   sliderSpeed: 30
   minPower: 1
   maxPower: 40

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -21,14 +22,23 @@ public class PlayerController : MonoBehaviour
     protected SpriteRenderer playerSpriteRenderer;
     private float frameTimer;
     private int frameIndex;
+    private string _currentState = "";
     protected Coroutine anim;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    protected virtual void Awake()
     {
         stateController = new StateController(StateController.PlayerState.Idle);
-        animationController = new AnimationController();
+        animationController = new AnimationController(idleAnimation, aimAnimation, fireAnimation, hitAnimation);
         playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+    }
+
+    public void StartTurn(){
+        stateController.TransitionToState(StateController.PlayerState.Aim);
+    }
+
+    public void EndTurn(){
+        stateController.TransitionToState(StateController.PlayerState.Idle);
     }
 
     void Start() {
@@ -38,19 +48,33 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         switch (stateController.GetPlayerState())
         {
             case StateController.PlayerState.Idle:
+                if(_currentState == "Idle") return;
+                _currentState ="Idle";
                 Idle();
                 break;
             case StateController.PlayerState.Aim:
+                if(_currentState == "Aim") return;
+                Debug.Log("Entering Aim for " + gameObject.name);
+                _currentState ="Aim";
                 Aim();
                 break;
             case StateController.PlayerState.Fire:
+                if(_currentState == "Fire") return;
+                _currentState ="Fire";
                 Fire();
                 break;
             case StateController.PlayerState.Hit:
+                if(_currentState == "Hit") return;
+                _currentState ="Hit";
                 Hit();
+                break;
+            default:
+                _currentState ="";
+                Debug.Log("not working");
                 break;
         }
     }
@@ -69,14 +93,14 @@ public class PlayerController : MonoBehaviour
     }
 
     protected virtual void Idle() {
-        stateController.TransitionToState(StateController.PlayerState.Aim);
+        stateController.TransitionToState(StateController.PlayerState.Idle);
             
-        StopCoroutine(anim);
+        if(anim != null) StopCoroutine(anim);
         anim = StartCoroutine(playAimAnimation());
     }
 
     protected virtual void Aim() {
-        StopCoroutine(anim);
+        if(anim != null) StopCoroutine(anim);
         anim = StartCoroutine(playFireAnimation());
     }
 
@@ -134,6 +158,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        stateController.TransitionToState(StateController.PlayerState.Hit);
+        if(other.gameObject.CompareTag("Projectile"))
+            stateController.TransitionToState(StateController.PlayerState.Hit);
     }
 }
