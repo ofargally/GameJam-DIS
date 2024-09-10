@@ -33,8 +33,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        switch(stateController.GetPlayerState()) {
+        switch (stateController.GetPlayerState())
+        {
             case StateController.PlayerState.Idle:
                 break;
             case StateController.PlayerState.Aim:
@@ -44,23 +44,6 @@ public class PlayerController : MonoBehaviour
             case StateController.PlayerState.Hit:
                 break;
         }
-        //Get the input from the player - use space to jump
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ThrowBall();
-        }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            TakeDamage(1);
-        }   
-    }
-
-    void ThrowBall()
-    {
-        //Throw the ball
-        GameObject ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
-        ball.GetComponent<Rigidbody2D>().AddForce(transform.forward * 1000);
-        ball.GetComponent<Rigidbody2D>().AddForce(transform.up * 1000);
     }
 
     void TakeDamage(int damage)
@@ -76,15 +59,16 @@ public class PlayerController : MonoBehaviour
         //TODO: Implement death
     }
 
-    protected virtual void Idle() {
-        
+    protected virtual void Idle()
+    {
+
     }
 
     protected virtual void Aim() {
-	    GameObject proj = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+        GameObject proj = Instantiate(ballPrefab, transform.position, Quaternion.identity);
 
         //change states
         Projectile.EOnProjectileFires += () => stateController.TransitionToState(StateController.PlayerState.Fire);
     }
-    
+
 }
