@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
         
     }
     private void Aim() {
-
+	GameObject proj = Instantiate(ballPrefab, transform.position, Quaternion.identity);
     }
     
 }

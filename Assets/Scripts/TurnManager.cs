@@ -12,7 +12,7 @@ public class TurnManager: MonoBehaviour {
     }
     private IEnumerator OnProjectileHit() {
         yield return new WaitForSeconds(waitTime);
-
+	SwapPlayer();
     }
     private void SwapPlayer() {
         isPlayer1Turn = !isPlayer1Turn;
