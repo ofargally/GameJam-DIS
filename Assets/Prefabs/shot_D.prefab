@@ -80,6 +80,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   power: 5
   angle: 45
-  powerSliderPrefab: {fileID: 8931630401356411677, guid: 503fbfabd004cd522b87c73d75ceb08e, type: 3}
-  angleSliderPrefab: {fileID: 6528708000844797221, guid: 67d9dd0d4152570a8a553d8753b1ffb8, type: 3}
   decayTime: 10
+  sliderSpeed: 30
+  minPower: 1
+  maxPower: 40
+  minAngle: 90
+  maxAngle: 180

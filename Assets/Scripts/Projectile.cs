@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;  // Required for Action
+using Unity.Collections;
 
 public class Projectile : MonoBehaviour
 {
@@ -11,80 +12,107 @@ public class Projectile : MonoBehaviour
 
     public float power = 5f;  // Initial magnitude of the velocity (speed)
     public float angle = 45f; // Angle in degrees
-    public GameObject powerSliderPrefab; // Reference to the power slider prefab
-    public GameObject angleSliderPrefab; // Reference to the angle slider prefab
 
-    public float decayTime; // time before projectile is deleted
+    public float decayTime; // Time before projectile is deleted
+    public float sliderSpeed = 10f; // Speed at which sliders move back and forth
+    public float minPower = 1f;    // Minimum power value
+    public float maxPower = 10f;   // Maximum power value
+    public float minAngle = 10f;   // Minimum angle value
+    public float maxAngle = 80f;   // Maximum angle value
 
     private Rigidbody2D rb;
     private LineRenderer lr;
-    private Slider powerSliderInstance; // Instance of the power slider
-    private Slider angleSliderInstance; // Instance of the angle slider
     private bool angleLocked = false; // Lock for angle
     private bool powerLocked = false; // Lock for power
     private bool hasLaunched = false;
+
+    private float angleSliderValue;  // Current value for the angle slider
+    private float powerSliderValue;  // Current value for the power slider
+
+    private int angleDirection = 1;  // Direction for the angle slider movement
+    private int powerDirection = 1;  // Direction for the power slider movement
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         lr = GetComponent<LineRenderer>();
 
-        // Instantiate the angle and power slider prefabs when the game starts
-        if (powerSliderPrefab != null && angleSliderPrefab != null)
-        {
-            GameObject powerSliderObj = Instantiate(powerSliderPrefab, FindFirstObjectByType<Canvas>().transform); // Instantiate in the UI Canvas
-            powerSliderInstance = powerSliderObj.GetComponent<Slider>();
+        // Initialize slider values to start at their midpoints
+        angleSliderValue = (minAngle + maxAngle) / 2f;
+        powerSliderValue = (minPower + maxPower) / 2f;
 
-            GameObject angleSliderObj = Instantiate(angleSliderPrefab, FindFirstObjectByType<Canvas>().transform); // Instantiate in the UI Canvas
-            angleSliderInstance = angleSliderObj.GetComponent<Slider>();
-        }
-        else
-        {
-            Debug.LogError("Power or Angle slider prefab is not assigned!");
-        }
-
-        Destroy(gameObject, decayTime); // destroy object after time to save space
+        Destroy(gameObject, decayTime); // Destroy the object after a certain time
     }
 
     void Update()
     {
-        // First space press locks in the angle
-        if (Input.GetKeyDown(KeyCode.Space) && !angleLocked)
-        {
-            if (angleSliderInstance != null)
-            {
-                angle = angleSliderInstance.value;
-                Debug.Log("Slider Value (Angle): " + angle);
-                angleLocked = true; // Lock the angle after the first press
-            }
-        }
-        // Second space press locks in the power
-        else if (Input.GetKeyDown(KeyCode.Space) && angleLocked && !powerLocked)
-        {
-            if (powerSliderInstance != null)
-            {
-                power = powerSliderInstance.value;
-                Debug.Log("Slider Value (Power): " + power);
-                powerLocked = true; // Lock the power after the second press
-            }
-        }
-        // Final space press launches the projectile
-        else if (Input.GetKeyDown(KeyCode.Space) && angleLocked && powerLocked && !hasLaunched)
-        {
-            // Launch the projectile
-            LaunchProjectile();
-            hasLaunched = true;
-
-            // Optionally, destroy the slider UIs after launching the projectile
-            Destroy(powerSliderInstance.gameObject);
-            Destroy(angleSliderInstance.gameObject);
-        }
-
-        // Show trajectory if not launched yet
         if (!hasLaunched)
         {
-            DisplayTrajectory();
+            // Move angle value if it's not locked
+            if (!angleLocked)
+            {
+                MoveAngleValue();
+            }
+
+            // Move power value if the angle is locked and power is not locked
+            if (angleLocked && !powerLocked)
+            {
+                MovePowerValue();
+            }
+
+            // Lock in the angle when the player presses space the first time
+            if (Input.GetKeyDown(KeyCode.Space) && !angleLocked)
+            {
+                angle = angleSliderValue;
+                Debug.Log("Angle locked at: " + angle);
+                angleLocked = true;
+            }
+            // Lock in the power when the player presses space the second time
+            else if (Input.GetKeyDown(KeyCode.Space) && angleLocked && !powerLocked)
+            {
+                power = powerSliderValue;
+                Debug.Log("Power locked at: " + power);
+                powerLocked = true;
+            }
+            // Launch the projectile when the player presses space the third time
+            else if (Input.GetKeyDown(KeyCode.Space) && angleLocked && powerLocked && !hasLaunched)
+            {
+                LaunchProjectile();
+                hasLaunched = true;
+            }
+
+            // Show trajectory if not launched yet
+            if (!hasLaunched)
+            {
+                DisplayTrajectory();
+            }
         }
+    }
+
+    void MoveAngleValue()
+    {
+        // Oscillate the angle value between min and max
+        angleSliderValue += sliderSpeed * angleDirection * Time.deltaTime;
+
+        if (angleSliderValue >= maxAngle || angleSliderValue <= minAngle)
+        {
+            angleDirection *= -1; // Reverse direction when reaching the boundaries
+        }
+
+        Debug.Log("Current Angle: " + angleSliderValue); // Debugging to show the value changing
+    }
+
+    void MovePowerValue()
+    {
+        // Oscillate the power value between min and max
+        powerSliderValue += sliderSpeed * powerDirection * Time.deltaTime;
+
+        if (powerSliderValue >= maxPower || powerSliderValue <= minPower)
+        {
+            powerDirection *= -1; // Reverse direction when reaching the boundaries
+        }
+
+        Debug.Log("Current Power: " + powerSliderValue); // Debugging to show the value changing
     }
 
     void LaunchProjectile()
@@ -113,11 +141,11 @@ public class Projectile : MonoBehaviour
         // Use slider values if the sliders are available and not yet locked
         if (!angleLocked)
         {
-            currentAngle = (angleSliderInstance != null ? angleSliderInstance.value : angle);
+            currentAngle = angleSliderValue;
         }
         if (!powerLocked && angleLocked)
         {
-            currentPower = (powerSliderInstance != null ? powerSliderInstance.value : power);
+            currentPower = powerSliderValue;
         }
         // Convert angle from degrees to radians
         float angleInRadians = currentAngle * Mathf.Deg2Rad;
